@@ -1,8 +1,16 @@
 package com.podologia.backend.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -10,6 +18,7 @@ import javax.persistence.Table;
 public class Users {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer idUser;
 
 	@Column(name = "alias", nullable =false, unique= true)
@@ -21,38 +30,10 @@ public class Users {
 	@Column(name="status", nullable=false)
 	private String status;
 
-	public Integer getIdUser() {
-		return idUser;
-	}
-
-	public void setIdUser(Integer idUser) {
-		this.idUser = idUser;
-	}
-
-	public String getName() {
-		return alias;
-	}
-
-	public void setAlias(String alias) {
-		this.alias = alias;
-	}
-
-	public String getPwd() {
-		return pwd;
-	}
-
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="usuario_rol", joinColumns= @JoinColumn (name= "id_usuario",referencedColumnName="idUser"),
+	inverseJoinColumns =  @JoinColumn(name="id_rol", referencedColumnName ="idRol"))
+	private List<Rol> roles;
 	
 	
 }

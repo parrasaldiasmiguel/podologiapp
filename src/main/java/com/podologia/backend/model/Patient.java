@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -18,6 +20,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class Patient {
 	
 	@Id
+	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private Integer idPatient;
 	
 	@ApiModelProperty(notes = "Names must be a min 3 char")
@@ -27,7 +30,7 @@ public class Patient {
 	
 	@ApiModelProperty(notes = "RUT  must be  8 char")
 	@Size(min = 8, max = 8, message = "RUT  must be  8 char")
-	@Column(name = "dni", nullable = false, length = 8)
+	@Column(name = "rut", nullable = false, length = 8)
 	private String rut;
 	
 	@ApiModelProperty(notes = "Surname must be a min 3 char")
@@ -43,6 +46,13 @@ public class Patient {
 	@ApiModelProperty(notes = "phone must be 9 char")
 	@Size(min = 9, max = 9, message = "phone must be 9 char")
 	private String phone;
+	
+	@Email
+	@Column(name="email",nullable=true, length=50)
+	private String email;
+	
+	@Column(name="activity", nullable=true, length = 50)
+	private String activity;
 	
 	public Integer getIdPatient() {
 		return idPatient;
@@ -116,11 +126,6 @@ public class Patient {
 		this.activity = activity;
 	}
 
-	@Email
-	@Column(name="email",nullable=true, length=50)
-	private String email;
-	
-	@Column(name="activity", nullable=true)
-	private String activity;
+
 }
 
