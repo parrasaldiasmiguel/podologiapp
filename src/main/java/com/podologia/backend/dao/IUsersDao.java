@@ -5,4 +5,5 @@ import com.podologia.backend.model.Users;
 
 public interface IUsersDao extends JpaRepository<Users, Integer> {
 
+	Users  findByIdUser(Integer idUser);
 }

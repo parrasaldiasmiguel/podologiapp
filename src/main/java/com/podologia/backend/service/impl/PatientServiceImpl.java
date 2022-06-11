@@ -47,8 +47,8 @@ public class PatientServiceImpl implements IPatientService{
 	}
 
 	@Override
-	public boolean delete(Patient pac) {
-		dao.delete(pac);
+	public boolean delete(Integer id) {
+		dao.deleteById(id);
 		return true;
 	}
 	
