@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiModel;
 
 @ApiModel(description = "Rol information")
 @Entity
-@Table(name="Rol")
+@Table(name="rol")
 public class Rol {
 	
 	@Id
